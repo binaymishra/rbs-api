@@ -37,7 +37,7 @@ public class UserRepositoryImpl implements UserRepository {
 		User user = null;
 		try {
 			List<User> users = template.query(USER_SQL, new UserRowMapper(new User()), username, password);
-			if(CollectionUtils.isNotEmpty(users) && users.size() == 1)
+			if(CollectionUtils.isNotEmpty(users))
 				user = users.get(0);
 		} catch (DataAccessException dataAccessException) {
 			throw new DataBaseException(dataAccessException.getMessage(), dataAccessException);

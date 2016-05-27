@@ -27,15 +27,4 @@ public class ApplicationConfig {
 	    .addScript("classpath:data.sql")
 	    .build();
 	  }
-
-/*	@Bean
-	  public DataSource h2Database() {
-	    DriverManagerDataSource dataSource = new DriverManagerDataSource();
-	    dataSource.setDriverClassName("org.h2.jdbcx.JdbcDataSource");
-	    dataSource.setUrl("jdbc:h2:tcp://localhost/~/user_db");
-	    dataSource.setUsername("sa");
-	    dataSource.setPassword("");
-	    return dataSource;
-	  }*/
-
 }
