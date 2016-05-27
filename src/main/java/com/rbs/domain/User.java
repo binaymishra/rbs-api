@@ -7,10 +7,14 @@ import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.apache.commons.lang3.builder.RecursiveToStringStyle;
 import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
+
 /**
  * @author Binay Mishra
  *
  */
+@JsonInclude(value=Include.NON_EMPTY, content=Include.NON_NULL)
 public class User {
 	private Long id;
 	private String username;

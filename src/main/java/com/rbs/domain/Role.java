@@ -5,14 +5,18 @@ import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.apache.commons.lang3.builder.RecursiveToStringStyle;
 import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
+
 /**
  * @author Binay Mishra
  *
  */
+@JsonInclude(value=Include.NON_EMPTY, content=Include.NON_NULL)
 public class Role {
-	
+
 	private String role;
-	
+
 	public Role() {
 		// Default constructor.
 	}
@@ -34,21 +38,21 @@ public class Role {
 	@Override
 	public int hashCode() {
 		return new HashCodeBuilder(3, 9)
-				.append(this.role)
+				.append(role)
 				.build();
 	}
-	
+
 	@Override
 	public boolean equals(Object obj) {
 		Role other = (Role) obj;
 		return new EqualsBuilder()
-				.append(this.role, other.role)
+				.append(role, other.role)
 				.build();
 	}
-	
+
 	@Override
 	  public String toString() {
-	    return new ReflectionToStringBuilder(this, 
+	    return new ReflectionToStringBuilder(this,
 	    		new RecursiveToStringStyle()).build();
 	  }
 }
