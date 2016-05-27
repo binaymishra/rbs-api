@@ -39,4 +39,9 @@ public class UserRepositoryImplTest {
 		System.err.println(userRepository.fetchByUsernameAndPassword("vinay", "bWlzaHJh"));
 	}
 
+	@Test
+	public void test_fetchByWrongUsernameAndPassword() {
+		System.err.println(userRepository.fetchByUsernameAndPassword("vinay", "mishra"));
+	}
+
 }
