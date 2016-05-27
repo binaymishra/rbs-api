@@ -1,12 +1,17 @@
 package com.rbs.repository;
 
+import java.util.List;
+
 import javax.sql.DataSource;
 
+import org.apache.commons.collections4.CollectionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 import com.rbs.domain.User;
+import com.rbs.exceptions.DataBaseException;
 
 /**
  * @author Binay Mishra
@@ -29,7 +34,15 @@ public class UserRepositoryImpl implements UserRepository {
 	 */
 	@Override
 	public User fetchByUsernameAndPassword(String username, String password) {
-		return template.query(USER_SQL, new UserRowMapper(new User()), username, password).get(0);
+		User user = null;
+		try {
+			List<User> users = template.query(USER_SQL, new UserRowMapper(new User()), username, password);
+			if(CollectionUtils.isNotEmpty(users) && users.size() == 1)
+				user = users.get(0);
+		} catch (DataAccessException dataAccessException) {
+			throw new DataBaseException(dataAccessException.getMessage(), dataAccessException);
+		}
+		return user;
 	}
 
 }
