@@ -2,7 +2,6 @@ package com.rbs.manager;
 
 import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 import org.apache.commons.collections4.CollectionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,11 +39,26 @@ public class UserManagerImpl implements UserManager {
 			if(null == user)
 				throw new RbsException("Invalid username or password");
 
-					setPermissionsToUserRoles(user);
+				setRolesToUser(user);
 
 			return user;
 		} catch (DataBaseException dataBaseException) {
 			throw new RbsException("Something wrong with database." ,dataBaseException);
+		}
+	}
+
+	/*
+	 * This method sets respective roles to user.
+	 *
+	 * @param user
+	 */
+	public void setRolesToUser(final User user) throws RbsException{
+		try {
+  			List<Role> roles = userRepository.fetchRolesByUserId(user.getId());
+  			setPermissionsToRoles(roles);
+  			user.setRoles(new HashSet<Role>(roles));
+		}catch (DataBaseException dataBaseException) {
+			throw new RbsException("Something wrong with database.", dataBaseException);
 		}
 	}
 
@@ -54,8 +68,7 @@ public class UserManagerImpl implements UserManager {
 	 * @param user
 	 * @throws RbsException
 	 */
-	private void setPermissionsToUserRoles(final User user) throws RbsException {
-		Set<Role> roles = user.getRoles();
+	private void setPermissionsToRoles(final List<Role> roles) throws RbsException {
 		try {
 			if (CollectionUtils.isNotEmpty(roles))
 				for (Role role : roles) {

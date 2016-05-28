@@ -18,6 +18,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import com.rbs.config.ApplicationConfig;
 import com.rbs.domain.Permission;
 import com.rbs.domain.User;
+import com.rbs.exceptions.DataBaseException;
 import com.rbs.repository.UserRepository;
 
 
@@ -50,7 +51,7 @@ public class UserRepositoryImplTest {
 		LOGGER.debug(user);
 	}
 
-	@Test
+	@Test(expected=DataBaseException.class)
 	public void test_fetchByWrongUsernameAndPassword() {
 		User user = userRepository.fetchByUsernameAndPassword("vinay", "wrong password");
 		Assert.assertNull(user);
