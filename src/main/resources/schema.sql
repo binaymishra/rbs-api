@@ -12,7 +12,22 @@ CREATE TABLE ROLE_TABLE (
 	role_id BIGINT,
 	role_name VARCHAR(100) DEFAULT NULL,
 	role_user_id BIGINT,
-	FOREIGN KEY (role_user_id) REFERENCES USER_TABLE (user_id)
+	FOREIGN KEY (role_user_id) REFERENCES USER_TABLE (user_id),
+	CONSTRAINT pk_role_id PRIMARY KEY (role_id)
+);
+
+CREATE TABLE PERMISSION_TABLE (
+	permission_id BIGINT,
+	permission_name VARCHAR(100) DEFAULT NULL,
+	permission_enable boolean DEFAULT FALSE,
+	CONSTRAINT pk_permission_id PRIMARY KEY (permission_id)
+);
+
+CREATE TABLE AUTHORIZATION_TABLE (
+	auth_role_id BIGINT,
+	auth_permission_id BIGINT, 
+	FOREIGN KEY (auth_role_id) REFERENCES ROLE_TABLE (role_id),
+	FOREIGN KEY (auth_permission_id) REFERENCES PERMISSION_TABLE (permission_id)
 );
 
 

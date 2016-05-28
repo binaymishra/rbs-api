@@ -1,5 +1,7 @@
 package com.rbs.domain;
 
+import java.util.Set;
+
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.apache.commons.lang3.builder.RecursiveToStringStyle;
@@ -17,6 +19,7 @@ public class Role {
 
 	private Long   id;
 	private String role;
+	private Set<Permission> permissions;
 
 	public Role() {
 		// Default constructor.
@@ -54,6 +57,20 @@ public class Role {
 	 */
 	public void setRole(String role) {
 		this.role = role;
+	}
+
+	/**
+	 * @return the permissions
+	 */
+	public Set<Permission> getPermissions() {
+		return permissions;
+	}
+
+	/**
+	 * @param permissions the permissions to set
+	 */
+	public void setPermissions(Set<Permission> permissions) {
+		this.permissions = permissions;
 	}
 
 	@Override

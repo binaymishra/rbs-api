@@ -1,5 +1,7 @@
 package com.rbs.repository.test;
 
+import java.util.List;
+
 import org.apache.log4j.Logger;
 import org.junit.After;
 import org.junit.AfterClass;
@@ -14,6 +16,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.rbs.config.ApplicationConfig;
+import com.rbs.domain.Permission;
 import com.rbs.domain.User;
 import com.rbs.repository.UserRepository;
 
@@ -51,6 +54,19 @@ public class UserRepositoryImplTest {
 	public void test_fetchByWrongUsernameAndPassword() {
 		User user = userRepository.fetchByUsernameAndPassword("vinay", "wrong password");
 		Assert.assertNull(user);
+	}
+
+	@Test
+	public void test_fetchPermissionsByRoleId_success(){
+		List<Permission> permissions = userRepository.fetchPermissionsByRoleId(Long.valueOf(2));
+		Assert.assertFalse(permissions.isEmpty());
+		LOGGER.debug(permissions);
+	}
+
+	@Test
+	public void test_fetchPermissionsByRoleId_failed(){
+		List<Permission> permissions = userRepository.fetchPermissionsByRoleId(Long.valueOf(1002));
+		Assert.assertTrue(permissions.isEmpty());
 	}
 
 }
