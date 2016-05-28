@@ -9,6 +9,7 @@ CREATE TABLE USER_TABLE (
 );
 
 CREATE TABLE ROLE_TABLE (
+	role_id BIGINT,
 	role_name VARCHAR(100) DEFAULT NULL,
 	role_user_id BIGINT,
 	FOREIGN KEY (role_user_id) REFERENCES USER_TABLE (user_id)

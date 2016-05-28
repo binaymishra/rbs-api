@@ -20,7 +20,7 @@ import com.rbs.exceptions.DataBaseException;
 @Repository("userRepository")
 public class UserRepositoryImpl implements UserRepository {
 
-	private static final String USER_SQL = "SELECT user.USER_ID, user.USER_NAME, user.USER_PASSWORD, role.ROLE_NAME FROM USER_TABLE user, ROLE_TABLE role WHERE user.USER_ID = role.ROLE_USER_ID AND user.USER_NAME = ? AND user.USER_PASSWORD = ?";
+	private static final String USER_SQL = "SELECT user.USER_ID, user.USER_NAME, user.USER_PASSWORD, role.ROLE_ID, role.ROLE_NAME FROM USER_TABLE user, ROLE_TABLE role WHERE user.USER_ID = role.ROLE_USER_ID AND user.USER_NAME = ? AND user.USER_PASSWORD = ?";
 
 	private JdbcTemplate template;
 

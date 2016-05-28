@@ -35,6 +35,7 @@ public class UserRowMapper implements RowMapper<User> {
 		user.setPassword(rs.getString("user_password"));
 
 		Role role = new Role();
+		role.setId(rs.getLong("role_id"));
 		role.setRole(rs.getString("role_name"));
 		Set<Role> roles = user.getRoles();
 		if (CollectionUtils.isEmpty(roles)) {

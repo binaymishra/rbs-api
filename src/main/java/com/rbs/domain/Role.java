@@ -15,10 +15,31 @@ import com.fasterxml.jackson.annotation.JsonInclude.Include;
 @JsonInclude(value=Include.NON_EMPTY, content=Include.NON_NULL)
 public class Role {
 
+	private Long   id;
 	private String role;
 
 	public Role() {
 		// Default constructor.
+	}
+
+	public Role(Long id, String role) {
+		super();
+		this.id = id;
+		this.role = role;
+	}
+
+	/**
+	 * @return the id
+	 */
+	public Long getId() {
+		return id;
+	}
+
+	/**
+	 * @param id the id to set
+	 */
+	public void setId(Long id) {
+		this.id = id;
 	}
 
 	/**
